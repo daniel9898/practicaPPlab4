@@ -1,20 +1,42 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<label>EDITAR</label>
+<input type="checkbox" [checked]="editar" (change)="editar = !editar"><br><br>  
+
+<div>          
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Sexo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let per of personas" [ngClass]="{'rose': per.sexo == 'f'}">
+        <td>{{ per.nombre }}</td>
+        <td>{{ per.email }}</td>
+        <td>{{ per.sexo }}</td>
+        <td><img src="../assets/{{ per.foto }}" width="25%" height="25%"></td>
+        <td><button (click)="deletePerson(per.id)">Eliminar</button> </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<div *ngIf="editar"  style="background-color: gray;">
+    Nombre:<br>
+    <input type="text" [(ngModel)]="persona.nombre">
+    <br>
+    Email:<br>
+    <input type="text" [(ngModel)]="persona.email">
+    <br>
+    Sexo:<br>
+    <select [(ngModel)]="persona.sexo">
+      <option value="m">Masculino</option>
+      <option value="f">Femenino</option>
+    </select>
+    <br><br>
+    <button (click)="savePerson()">Enviar</button> 
+</div>
+
+<app-mostrar-persona [pers]="this.persona"></app-mostrar-persona> 
 
